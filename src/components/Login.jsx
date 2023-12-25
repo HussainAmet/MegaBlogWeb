@@ -5,6 +5,7 @@ import { Button, Input, Logo } from './index'
 import { useDispatch } from 'react-redux'
 import authService from '../appwrite/auth'
 import { useForm } from 'react-hook-form'
+import { reload } from '../reload'
 
 function Login() {
     const navigate = useNavigate()
@@ -20,6 +21,7 @@ function Login() {
                 const userData = await authService.getCurrentUser()
                 if (userData) dispatch(authLogin(userData));
                 navigate("/")
+                reload()
             }
         } catch (error) {
             setError(error.message)
