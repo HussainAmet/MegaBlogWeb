@@ -5,9 +5,12 @@ import { login, logout } from './store/authSlice'
 import { Footer, Header } from './components'
 import { Outlet } from 'react-router-dom'
 
+import { getAllPosts } from './store/postSlice'
+import service from './appwrite/conf'
+
 function App() {
   const [loading, setLoading] = useState(true)
-  const dispatch = useDispatch ()
+  const dispatch = useDispatch();
 
   useEffect (() => {
     authService.getCurrentUser()
@@ -18,7 +21,13 @@ function App() {
         dispatch(logout())
       }
     })
-    .finally(() => setLoading(false))
+    .finally(() => setLoading(false));
+
+    service.getPosts().then((posts) => {
+      if (posts) {
+          dispatch(getAllPosts({posts}))
+      }
+    });
   }, [])
 
   return !loading ? (

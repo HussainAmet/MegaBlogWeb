@@ -4,6 +4,7 @@ import service from "../appwrite/conf";
 import { Button, Container } from "../components";
 import parse from "html-react-parser";
 import { useSelector } from "react-redux";
+import { reload } from "../reload";
 
 export default function Post() {
     const [post, setPost] = useState(null);
@@ -23,13 +24,14 @@ export default function Post() {
         } else navigate("/");
     }, [slug, navigate]);
 
-    const deletePost = () => {
-        service.deletePost(post.$id).then((status) => {
+    const deletePost = async () => {
+        await service.deletePost(post.$id).then((status) => {
             if (status) {
                 service.deleteFile(post.featuredImage);
                 navigate("/");
             }
         });
+        reload();
     };
 
     return post ? (

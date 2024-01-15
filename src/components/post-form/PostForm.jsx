@@ -4,6 +4,7 @@ import { RTE, Button, Input, Select } from '../index'
 import service from '../../appwrite/conf'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import { reload } from '../../reload'
 
 function PostForm({post}) {
     const navigate = useNavigate()
@@ -41,6 +42,7 @@ function PostForm({post}) {
                 if (dbPost) navigate(`/post/${dbPost.$id}`)
             }
         }
+        reload();
     }
 
     const slugTransform = useCallback((value) => {
