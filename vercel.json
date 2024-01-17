@@ -1,5 +1,5 @@
 {
     "rewrites": [
-        { "source": "/resize/:width/:height", "destination": "/api/sharp" }
+        { "source": "/resize/:width/:height", "destination": "/post/" }
     ]
 }
