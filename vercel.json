@@ -1,5 +1,5 @@
 {
     "rewrites": [
-        {"source": "/(.*)", "destination": "/(.*)"}
+        { "source": "/resize/:width/:height", "destination": "/api/sharp" }
     ]
 }
