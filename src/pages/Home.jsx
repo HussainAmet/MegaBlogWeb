@@ -12,7 +12,7 @@ function Home() {
     if (allPost.length === 0) {
         return (
             <div className="w-full py-8 mt-4 text-center">
-                <Container>
+                <Container children={
                     <div className="flex flex-wrap">
                         <div className="p-2 w-full">
                             <h1 className="text-2xl font-bold hover:text-gray-500">
@@ -20,7 +20,7 @@ function Home() {
                             </h1>
                         </div>
                     </div>
-                </Container>
+                }/>
             </div>
         )
     }
@@ -28,7 +28,7 @@ function Home() {
     return (
         <div className='w-full py-8'>
             <div className='w-full py-8'>
-                <Container>
+                <Container children={
                     <div className='flex flex-wrap'>
                         {allPost.map((post) => (
                             <div key={post.$id} className='p-2 w-1/4'>
@@ -36,7 +36,7 @@ function Home() {
                             </div>
                         ))}
                     </div>
-                </Container>
+                }/>
             </div>
         </div>
     )
