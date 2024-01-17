@@ -1,7 +1,7 @@
 {
     "rewrites": [
 		{
-			"source": "/(.*)", "destination": "https://mega-blog-web.vercel.app/"
+			"source": "/(.*)", "destination": "/post/sdjuc-cdubuscdsd"
 		}
 	]
 }
