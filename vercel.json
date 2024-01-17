@@ -1,5 +1,5 @@
 {
     "rewrites": [
-        { "source": "/resize/:width/:height", "destination": "/post/" }
+        { "routes": [{ "src": "/[^.]+", "dest": "/", "status": 200 }] }
     ]
 }
