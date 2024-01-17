@@ -12,17 +12,21 @@ export default function Post() {
     const navigate = useNavigate();
 
     const userData = useSelector((state) => state.auth.userData);
+    const posts = useSelector(state => state.posts.allPosts)
 
     const isAuthor = post && userData ? post.userId === userData.$id : false;
 
     useEffect(() => {
         if (slug) {
-            service.getPost(slug).then((post) => {
-                if (post) setPost(post);
+            if (posts?.documents)
+            {
+                const findpost = posts.documents.find((post) => slug === post.$id)
+                if (findpost) setPost(findpost);
                 else navigate("/");
-            });
+            }
+            else navigate("/");
         } else navigate("/");
-    }, [slug, navigate]);
+    }, [slug, navigate, posts]);
 
     const deletePost = async () => {
         await service.deletePost(post.$id).then((status) => {

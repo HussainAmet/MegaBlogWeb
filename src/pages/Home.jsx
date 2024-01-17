@@ -6,7 +6,7 @@ function Home() {
     const [allPost, setAllPost] = useState([])
     const posts = useSelector(state => state.posts.allPosts)
     useEffect(() => {
-        if (posts && posts.documents) setAllPost(posts.documents);
+        if (posts?.documents) setAllPost(posts.documents);
     }, [posts])
 
     if (allPost.length === 0) {
