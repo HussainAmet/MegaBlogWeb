@@ -1,7 +1,7 @@
 {
     "rewrites": [
 		{
-			"source": "/:match*", "destination": "/:match*"
+			"source": "/(.*)", "destination": "https://mega-blog-web.vercel.app/(.*)"
 		}
 	]
 }
