@@ -4,11 +4,12 @@ import authService from './appwrite/auth'
 import { login, logout } from './store/authSlice'
 import { Footer, Header } from './components'
 import { Outlet } from 'react-router-dom'
-
+import { useNavigate } from 'react-router-dom'
 import { getAllPosts } from './store/postSlice'
 import service from './appwrite/conf'
 
 function App() {
+  const navigate = useNavigate()
   const [loading, setLoading] = useState(true)
   const dispatch = useDispatch();
 
@@ -24,9 +25,9 @@ function App() {
     .finally(() => setLoading(false));
 
     service.getPosts().then((posts) => {
-      if (posts) {
+      if (posts != false) {
           dispatch(getAllPosts({posts}))
-      }
+      } else navigate("/")
     });
   }, [])
 

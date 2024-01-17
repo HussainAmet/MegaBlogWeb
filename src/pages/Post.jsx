@@ -29,12 +29,15 @@ export default function Post() {
 
     const deletePost = async () => {
         await service.deletePost(post.$id).then((status) => {
-            if (status) {
-                service.deleteFile(post.featuredImage);
-                navigate("/");
-            }
+            if (status === true) {
+                service.deleteFile(post.featuredImage).then((status) => {
+                    if (status === true) {
+                        reload();
+                        navigate("/");
+                    } else navigate("/")
+                })
+            } else navigate("/")
         });
-        reload();
     };
 
     return post ? (
@@ -42,24 +45,24 @@ export default function Post() {
             <Container children={
                 <>
                     <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
-                        <img
-                            src={service.getFilepreview(post.featuredImage)}
-                            alt={post.title}
-                            className="rounded-xl"
-                        />
+                    <img
+                        src={service.getFilepreview(post.featuredImage)}
+                        alt={post.title}
+                        className="rounded-xl"
+                    />
 
-                        {isAuthor && (
-                            <div className="absolute right-6 top-6">
-                                <Link to={`/edit-post/${post.$id}`}>
-                                    <Button bgColor="bg-green-500" className="mr-3">
-                                        Edit
-                                    </Button>
-                                </Link>
-                                <Button bgColor="bg-red-500" onClick={deletePost}>
-                                    Delete
+                    {isAuthor && (
+                        <div className="absolute right-6 top-6">
+                            <Link to={`/edit-post/${post.$id}`}>
+                                <Button bgColor="bg-green-500" className="mr-3">
+                                    Edit
                                 </Button>
-                            </div>
-                        )}
+                            </Link>
+                            <Button bgColor="bg-red-500" onClick={deletePost}>
+                                Delete
+                            </Button>
+                        </div>
+                    )}
                     </div>
                     <div className="w-full mb-6">
                         <h1 className="text-2xl font-bold">{post.title}</h1>

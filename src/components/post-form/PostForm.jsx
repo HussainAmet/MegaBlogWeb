@@ -22,7 +22,7 @@ function PostForm({post}) {
     const submit = async (data) => {
         if (post) {
             const file = data.image[0] ? await service.uploadFile(data.image[0]) : null
-
+            console.log(file);
             if (file) service.deleteFile(post.featuredImage)
 
             const dbPost = await service.updatePost(post.$id, {
@@ -30,16 +30,20 @@ function PostForm({post}) {
                 featuredImage: file ? file.$id : undefined,
             });
 
-            if (dbPost) navigate(`/post/${dbPost.$id}`)
+            if (dbPost != false) navigate(`/post/${dbPost.$id}`)
+            else navigate("/")
         } else {
             const file = await service.uploadFile(data.image[0])
 
             if (file) {
-                const fileId = file.$id
-                data.featuredImage = fileId
+                data.featuredImage = file.$id
                 const dbPost = await service.createPost({...data, userId: userData.$id})
-                
-                if (dbPost) navigate(`/post/${dbPost.$id}`)
+                if (dbPost != false) navigate(`/post/${dbPost.$id}`)
+                else
+                {
+                    service.deleteFile(file.$id)
+                    navigate("/")
+                }
             }
         }
         reload();

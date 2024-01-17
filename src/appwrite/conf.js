@@ -30,6 +30,7 @@ export class Service {
             )
         } catch (error) {
             console.log("Appwrite service :: createPost :: error ", error)
+            return false
         }
     }
 
@@ -48,6 +49,7 @@ export class Service {
             )
         } catch (error) {
             console.log("Appwrite service :: updatePost :: error ", error)
+            return false;
         }
     }
 
@@ -108,7 +110,7 @@ export class Service {
 
     async deleteFile (fileId) {
         try {
-            return await this.bucket.deleteFile(
+            await this.bucket.deleteFile(
                 config.appwriteBucketId,
                 fileId,
             )
@@ -120,10 +122,14 @@ export class Service {
     }
 
     getFilepreview (fileId) {
-        return this.bucket.getFilePreview(
-            config.appwriteBucketId,
-            fileId,
-        )
+        try {
+            return this.bucket.getFilePreview(
+                config.appwriteBucketId,
+                fileId,
+            )
+        } catch (error) {
+            console.log("Appwrite service :: getFilepreview :: error ", error)
+        }
     }
 }
 
