@@ -26,7 +26,6 @@ function App() {
     service.getPosts().then((posts) => {
       if (posts) {
           dispatch(getAllPosts({posts}))
-          console.log("123");
       }
     });
   }, [])
