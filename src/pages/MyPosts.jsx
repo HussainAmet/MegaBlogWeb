@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { PostCard, Container } from '../components'
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 function MyPosts() {
     const [myPosts, setMyPosts] = useState([])
@@ -28,22 +29,8 @@ function MyPosts() {
                 <Container children={
                     <div className="flex flex-wrap">
                         <div className="p-2 w-full">
-                            <h1 className="text-2xl font-bold hover:text-gray-500">
+                            <h1 className="text-2xl font-bold">
                                 Loading...
-                            </h1>
-                        </div>
-                    </div>
-                }/>
-            </div>
-        )
-    } else if (posts === null) {
-        return (
-            <div className="w-full py-8 mt-4 text-center">
-                <Container children={
-                    <div className="flex flex-wrap">
-                        <div className="p-2 w-full">
-                            <h1 className="text-2xl font-bold hover:text-gray-500">
-                                Login to see posts!
                             </h1>
                         </div>
                     </div>
@@ -56,8 +43,10 @@ function MyPosts() {
                 <Container children={
                     <div className="flex flex-wrap">
                         <div className="p-2 w-full">
-                            <h1 className="text-2xl font-bold hover:text-gray-500">
-                                There are no Posts!
+                            <h1 className="text-2xl font-bold">
+                                <Link className='rounded-md bg-indigo-600 px-6 py-4 text-lg font-semibold text-white shadow-sm hover:bg-indigo-500' to={"/add-post"}>
+                                    Add Post
+                                </Link>
                             </h1>
                         </div>
                     </div>
@@ -71,7 +60,7 @@ function MyPosts() {
                     <Container children={
                         <div className='flex flex-wrap'>
                             {myPosts.map((post) => (
-                                <div key={post.$id} className='p-2 w-1/4'>
+                                <div key={post?.$id} className='p-2 w-1/4'>
                                     <PostCard {...post} />
                                 </div>
                             ))}
