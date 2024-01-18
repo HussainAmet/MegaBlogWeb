@@ -25,7 +25,7 @@ function App() {
     .finally(() => setLoading(false));
 
     service.getPosts().then((posts) => {
-      if (posts != false) {
+      if (posts || posts === null) {
           dispatch(getAllPosts({posts}))
       } else navigate("/")
     });

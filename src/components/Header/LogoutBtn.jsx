@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import authService from '../../appwrite/auth'
 import { logout } from '../../store/authSlice'
 import { reload } from '../../reload'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 function LogoutBtn() {
     const navigate = useNavigate()

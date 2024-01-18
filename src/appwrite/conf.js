@@ -89,7 +89,7 @@ export class Service {
             )
         } catch (error) {
             console.log("Appwrite service :: getPosts :: error ", error)
-            return false
+            return null
         }
     }
 

@@ -1,25 +1,28 @@
 import React, { useState, useEffect } from 'react'
+import { PostCard, Container } from '../components'
 import { useSelector } from 'react-redux'
-import { Container, PostCard } from '../components'
 
-function Home() {
-    const [allPost, setAllPost] = useState([])
+function MyPosts() {
+    const [myPosts, setMyPosts] = useState([])
     const [isLoading, setIsLoading] = useState(true)
 
+    const userData = useSelector((state) => state.auth.userData);
     const posts = useSelector(state => state.posts.allPosts)
 
     useEffect(() => {
 
-        if (posts?.documents) setAllPost(posts.documents);
+        if (posts && posts.documents)
+            setMyPosts(posts.documents.filter((post) => post.userId === userData.$id));
 
         const delay = setTimeout(() => {
             setIsLoading(false);
         }, 500);
         return () => clearTimeout(delay);
-        
-    }, [posts])
 
-    if (isLoading) {
+    }, [posts, userData, isLoading])
+
+    if (isLoading)
+    {
         return (
             <div className="w-full py-8 mt-4 text-center">
                 <Container children={
@@ -47,7 +50,7 @@ function Home() {
                 }/>
             </div>
         )
-    } else if (allPost.length === 0) {
+    } else if (myPosts.length === 0) {
         return (
             <div className="w-full py-8 mt-4 text-center">
                 <Container children={
@@ -67,7 +70,7 @@ function Home() {
                 <div className='w-full py-8'>
                     <Container children={
                         <div className='flex flex-wrap'>
-                            {allPost.map((post) => (
+                            {myPosts.map((post) => (
                                 <div key={post.$id} className='p-2 w-1/4'>
                                     <PostCard {...post} />
                                 </div>
@@ -80,4 +83,4 @@ function Home() {
     }
 }
 
-export default Home
+export default MyPosts
