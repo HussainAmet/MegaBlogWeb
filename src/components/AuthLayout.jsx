@@ -16,7 +16,15 @@ function AuthLayout({children, authentication = true}) {
         setLoader(false)
     }, [authStatus, navigate, authentication])
 
-  return loader ? <h1>Loading...</h1> : <>{children}</>
+  return loader ? (
+    <div className="flex flex-wrap">
+        <div className="p-2 w-full">
+            <h1 className="text-2xl font-bold">
+                Loading...
+            </h1>
+        </div>
+    </div>
+  ) : <>{children}</>
 }
 
 export default AuthLayout;

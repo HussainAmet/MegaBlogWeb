@@ -1,8 +1,9 @@
 import React from 'react'
+import logo from '../../assets/CTLogo.png'
 
 function Logo() {
   return (
-    <div>Logo</div>
+    <div><img src={logo} alt="logo" className='bg-black w-[40px]'/></div>
   )
 }
 

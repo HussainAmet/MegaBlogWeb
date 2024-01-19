@@ -14,13 +14,14 @@ export class Service {
         this.bucket = new Storage (this.client)
     }
 
-    async createPost ({title, slug, content, featuredImage, status, userId}) {
+    async createPost ({name, title, slug, content, featuredImage, status, userId}) {
         try {
             return await this.databases.createDocument (
                 config.appwriteDatabaseId,
                 config.appwriteCollectionId,
                 slug,
                 {
+                    name,
                     title,
                     content,
                     featuredImage,
@@ -80,7 +81,7 @@ export class Service {
     //     }
     // }
 
-    async getPosts (queries = [Query.equal('status', 'active')]) {
+    async getPosts (queries = [Query.orderDesc('$createdAt')]) {
         try {
             return await this.databases.listDocuments (
                 config.appwriteDatabaseId,
@@ -129,6 +130,7 @@ export class Service {
             )
         } catch (error) {
             console.log("Appwrite service :: getFilepreview :: error ", error)
+            return false;
         }
     }
 }

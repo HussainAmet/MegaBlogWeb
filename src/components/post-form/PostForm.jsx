@@ -10,6 +10,7 @@ function PostForm({post}) {
     const navigate = useNavigate()
     const {register, handleSubmit, watch, setValue, control, getValues} = useForm({
         defaultValues: {
+            name: post?.name || "",
             title: post?.title || "",
             slug: post?.$id || "",
             content: post?.content || "",
@@ -37,7 +38,7 @@ function PostForm({post}) {
 
             if (file) {
                 data.featuredImage = file.$id
-                const dbPost = await service.createPost({...data, userId: userData.$id})
+                const dbPost = await service.createPost({...data, userId: userData.$id, name: userData.name})
                 if (dbPost != false) navigate(`/post/${dbPost.$id}`)
                 else
                 {

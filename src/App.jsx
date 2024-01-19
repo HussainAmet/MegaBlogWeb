@@ -41,7 +41,25 @@ function App() {
         <Footer />
       </div>
     </div>
-  ) : <h1>Loading...</h1>
+  )
+  :
+  (
+    <div className='min-h-screen flex flex-wrap content-between bg-gray-400'>
+      <div className='w-full block'>
+        <Header />
+        <main className="w-full py-8 mt-4 text-center">
+          <div className="flex flex-wrap">
+            <div className="p-2 w-full">
+              <h1 className="text-2xl font-bold">
+                  Loading...
+              </h1>
+            </div>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    </div>
+  )
 }
 
 export default App
