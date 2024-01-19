@@ -12,9 +12,7 @@ function Home() {
 
     useEffect(() => {
 
-        if (posts?.documents){
-            setAllPost(posts.documents.filter((post) => post.status === "active"));
-        }
+        if (posts?.documents) setAllPost(posts.documents.filter((post) => post.status === "active"));
 
         const delay = setTimeout(() => {
             setIsLoading(false);

@@ -23,6 +23,7 @@ export class AuthService {
             }
         } catch (error) {
             console.log("Appwrite service :: userAccount :: error ", error)
+            throw error
         }
     }
 
@@ -31,6 +32,7 @@ export class AuthService {
             return await this.account.createEmailSession(email, password);
         } catch (error) {
             console.log("Appwrite service :: login :: error ", error)
+            throw error
         }
     }
 
@@ -48,6 +50,7 @@ export class AuthService {
             return await this.account.deleteSessions();            
         } catch (error) {
             console.log("Appwrite service :: logout :: error ", error)
+            throw error
         }
     }
 }
