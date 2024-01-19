@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { RTE, Button, Input, Select } from '../index'
 import service from '../../appwrite/conf'
@@ -7,6 +7,8 @@ import { useSelector } from 'react-redux'
 import { reload } from '../../reload'
 
 function PostForm({post}) {
+    const [buttonDisabled, setButtonDisabled] = useState(false)
+
     const navigate = useNavigate()
     const {register, handleSubmit, watch, setValue, control, getValues} = useForm({
         defaultValues: {
@@ -21,6 +23,7 @@ function PostForm({post}) {
     const userData = useSelector(state => state.auth.userData)
 
     const submit = async (data) => {
+        setButtonDisabled(true);
         if (post) {
             const file = data.image[0] ? await service.uploadFile(data.image[0]) : null
             console.log(file);
@@ -114,7 +117,7 @@ function PostForm({post}) {
                     className="mb-4"
                     {...register("status", { required: true })}
                 />
-                <Button type="submit" bgColor={post ? "bg-green-500" : undefined} className="w-full">
+                <Button type="submit" disabled={buttonDisabled} bgColor={post ? "bg-green-500" : undefined} className="w-full">
                     {post ? "Update" : "Submit"}
                 </Button>
             </div>
