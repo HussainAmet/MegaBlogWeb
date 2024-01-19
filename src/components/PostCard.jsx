@@ -9,9 +9,9 @@ function PostCard({$id, title, featuredImage, status = "active"}) {
         {status === "inactive" ? <h2 className='text-xl text-red-600 font-bold mb-4'>{status}</h2> : null}
         <div className='flex-col w-full justify-center mb-4'>
           <div className='mb-4'>
-            {featuredImage? <img src={service.getFilepreview(featuredImage)} alt={title} className='rounded-xl' /> : <img src="../../assets/404.jpg" alt="404" /> }
+            <img src={service.getFilepreview(featuredImage)} alt={title} className='rounded-xl' />
           </div>
-          <h2 className='text-xl font-bold'>{title ? title : "Post Not Found :("}</h2>
+          <h2 className='text-xl font-bold'>{title}</h2>
         </div>
       </div>
     </Link>
