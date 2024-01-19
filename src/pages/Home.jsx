@@ -82,7 +82,7 @@ function Home() {
                                     </div>
                                     <div className='text-center'>
                                         <Link className='flex rounded-md bg-indigo-600 px-6 py-4 text-lg font-semibold text-white shadow-sm hover:bg-indigo-500' to={"/login"}>
-                                            <pre>Login To see more post </pre> {(allPost.length) > 0 ? <pre>+ {allPost.length - 2}</pre> : ""}
+                                            Login To see more post {(allPost.length - 2) > 0 ? <pre> + {allPost.length - 2}</pre> : ""}
                                         </Link>
                                     </div>
                                 </>
