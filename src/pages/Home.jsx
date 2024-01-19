@@ -18,7 +18,7 @@ function Home() {
             setIsLoading(false);
         }, 500);
         return () => clearTimeout(delay);
-        
+
     }, [posts, authStatus])
 
     if (isLoading) {
@@ -81,8 +81,8 @@ function Home() {
                                         </div>
                                     </div>
                                     <div className='text-center'>
-                                        <Link className='rounded-md bg-indigo-600 px-6 py-4 text-lg font-semibold text-white shadow-sm hover:bg-indigo-500' to={"/login"}>
-                                            Login To see more post + {allPost.length - 2}
+                                        <Link className='flex rounded-md bg-indigo-600 px-6 py-4 text-lg font-semibold text-white shadow-sm hover:bg-indigo-500' to={"/login"}>
+                                            <pre>Login To see more post </pre> {(allPost.length) > 0 ? <pre>+ {allPost.length - 2}</pre> : ""}
                                         </Link>
                                     </div>
                                 </>
